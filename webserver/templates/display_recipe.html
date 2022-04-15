@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-6">
+        <div>
+            <div class="photo_frame"><img src = {{recipe[0][8]}} class = "photo"></img></div>
+            <div>
+                
+                    {% if liked %}
+                        <button id="like" onclick="location.href='/unlike_recipe/{{recipe[0][0]}}'">
+                            <i class="fa fa-heart fa-2x" style="color:red"></i>
+                            <span class="icon">{{likes[0][0]}} Likes</span>
+                        </button>
+                    {% else %}
+                        <button id="like" onclick="location.href='/like_recipe/{{recipe[0][0]}}'">
+                            <i class="fa fa-heart fa-2x"></i>
+                            <span class="icon">{{likes[0][0]}} Likes</span>
+                        </button>
+                    {% endif %}
+                
+                    {% if saved %}
+                        <button id="save" onclick="location.href='/unsave_recipe/{{recipe[0][0]}}'">
+                            <i class="fa fa-bookmark fa-2x" style="color:red"></i>
+                            <span class="icon">Saved</span>
+                        </button> 
+                    {% else %}
+                        <button id="save" onclick="location.href='/save_recipe/{{recipe[0][0]}}'">
+                            <i class="fa fa-bookmark fa-2x"></i>
+                            <span class="icon">Save</span> 
+                        </button>
+                    {% endif %}
+                
+            </div>
+            <br><hr><br>
+            <div><span class="title">Comments</span></div>
+            <br>
+            {%  for comment in comments%}
+                <div class="post_container">
+                    <div>
+                        <a href="{{url_for('display_user', uid=comment[0])}}" class="post_username">{{comment[1]}}</a><span>on {{comment[2]}}: </span>
+                        {% if comment[4] == 1 %}
+                            <button><i class="fa fa-heart fa-1x"></i></button>
+                        {% else %}
+                            <button onclick="location.href='/like_comment/{{comment[5]}}/{{recipe[0][0]}}'">
+                                <i class="fa fa-heart fa-1x"></i>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div><span>{{comment[3]}}</span></div>
+                </div>
+            {% endfor %} 
+            <div>
+                <form action="/post_comment/{{recipe[0][0]}}" method="POST" id="comment-form">
+                    <input type="text" name="comment" id="comment-field" class="login-form-field" placeholder="Type comment here">
+                    <input type="submit" value="Post" id="comment-form-submit">
+                </form>
+            </div>
+            <br><br>
+        </div>
+    </div>
+    <div class="col-6 description_box">
+        <div class="description_box">
+            <div id="title"> {{recipe[0][1]}}</div>
+            <br><hr><br>
+            <div id="description">
+                <span class="attribute">Description: </span> 
+                <p>{{recipe[0][4]}}</p>
+            </div> 
+            <div id="guide">
+                <span class="attribute">Guide: </span> 
+                <p>{{recipe[0][5]}}</p>
+            </div>
+            <div id="equipments">
+                <div><span class="attribute">Required Equipments and Settings:</span></div>
+                {% for equipment in equipments %}
+                    <div><a href="{{url_for('display_equipment', id=equipment[0])}}">{{equipment[1]}}</a><span>: {{equipment[2]}}</span></div>
+                {% endfor %}    
+            </div>
+            <br>
+            <div id = "creator">
+                <div><span class="attribute"> Creator: </span><a href = "{{url_for('display_user', uid=creator[0][1])}}">{{creator[0][0]}}</a></div>
+                <div><span class="attribute">Created on: </span><span>{{creator[0][2]}}</span></div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

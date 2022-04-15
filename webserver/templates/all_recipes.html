@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col">
+        <span class="title">Coffee Recipes</span>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <div>
+            {% for item in data %}
+
+            <div><span><a href = "{{url_for('display_recipe', id=item[0])}}">{{item[1]}}</a></link></span></div> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- {{ "%-20s"|format(variable) }}  -->
+
+<!-- {{ "%-10s" | format("test",) }} -->
+
+<!-- <div><span>{{"%-10s" | format((item[0]|string).rjust(-20))}} | </span><span><a href = "{{user_url}}">{{item[1]}}</a></link></span></div> -->

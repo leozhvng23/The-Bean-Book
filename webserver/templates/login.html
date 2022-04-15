@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <title>Login</title>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div id="login-error-msg-holder">
+        {% for message in messages %}
+          <p id="login-error-msg"><span>{{ message }}</span></p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  <br>
+  <h1 id="login-header">Log in</h1>
+  <hr>  
+  <form action="/login" method="POST" id="login-form">
+    <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Email">
+    <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+    <input type="submit" value="Log in" id="login-form-submit">
+  </form>
+
+  <br></br>
+
+  <h1 id="login-header">Sign up</h1> 
+  <hr>    
+  <form action="/signup" method="POST" id="login-form">
+    <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Email">
+    <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+    <input type="text" name="name" id="name-field" class="login-form-field" placeholder="Name (First Last)">
+    <input type="text" name="bio" id="bio-field" class="login-form-field" placeholder="Bio"> 
+    <input type="submit" value="Sign up" id="login-form-submit">
+  </form>
+
+{% endblock %}

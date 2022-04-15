@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col">
+        <div><span class="title">{{user[0][0]}}</span></div>
+        <br>
+        <div>
+            <span class="attribute">Bio: </span>
+            <p>{{user[0][1]}}</p>
+        </div>
+    </div>
+</div>
+<hr><br>
+<div class="row">
+    <div class="col-4">
+        <div><span class="attribute">Followed Users:</span></div>
+        <br>
+        <div>
+            {% for user in following %}
+                <div><span><a href = "{{url_for('display_user', uid=user[1])}}">{{user[0]}}</a></span></div> 
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div><span class="attribute">Saved Recipes: </span></div>
+        <br>
+        <div>
+            {% for recipe in saved_recipes%}
+                <div><span><a href = "{{url_for('display_recipe', id=recipe[1])}}">{{recipe[0]}}</a></span></div> 
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div><span class="attribute">My Recipes:</span></div>
+        <br>
+        <div>
+            {% for recipe in my_recipes%}
+                <div><span><a href = "{{url_for('display_recipe', id=recipe[1])}}">{{recipe[0]}}</a></span></div> 
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

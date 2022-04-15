@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <br>
+        <div><span class="title">{{user[0][0]}}</span></div>
+        <br>
+        <div>
+            <span class="attribute">Bio: </span>
+            <p>{{user[0][1]}}</p>
+        </div>
+            {% if following %}
+                <div><button id="follow-button">Following</button></div>
+            {% else %}
+                <div><button onclick="location.href='/follow/{{user[0][2]}}'" id="follow-button">+ Follow</button></div>
+            {% endif%}
+        </div>
+</div>
+<br><hr><br>
+<div class="row">
+    <div class="col-4">
+        <div><span class="attribute">Recipes:</span></div>
+        <br>
+        <div>
+            {% for recipe in recipes%}
+                <div><span><a href = "{{url_for('display_recipe', id=recipe[1])}}">{{recipe[0]}}</a></span></div> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

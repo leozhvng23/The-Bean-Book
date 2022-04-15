@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <br>
+        <span class="title">Hello {{ name }}!</span>
+    </div>
+</div>
+
+<br><hr><br>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row"><span class="title">Featured Recipes:</span></div>
+        <br>
+        <div class="row" id="featured_recipes">
+            {% for recipe in featured_recipes %}
+                <div class="col-3">
+                    <div id="featured_card" onclick="location.href='/display_recipe/{{recipe[0]}}.html'">
+                        <div><span>Recipe: {{recipe[1]}}</span></div>
+                        <br>
+                        <div><span>Description: {{recipe[2]}}</span></div>
+                        <br>
+                        <div class="featured_image_frame"><img class="featured_image" src="{{recipe[3]}}"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <br><hr><br>
+
+        <div class="row"><span class="title">My Feed:</span></div>
+        <br>
+        <div class="container">
+            {% for recipe in feed %}
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div id="feed_card" onclick="location.href='/display_recipe/{{recipe[1]}}.html'">
+                            <div><span>Recipe: {{recipe[2]}}</span></div>
+                            <div><span>Author: {{recipe[0]}}</span></div>
+                            <div class="feed_image_frame"><img class="feed_image" src="{{recipe[3]}}"></div>
+                            <div><span>Description: {{recipe[4]}}</span></div>
+                            <div><span>Created on: {{recipe[5]}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        <div class="container">
+    </div>
+</div>
+
+
+{% endblock %}

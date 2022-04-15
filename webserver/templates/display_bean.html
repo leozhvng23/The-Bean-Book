@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col">
+        <div>
+            {% for item in data %} 
+            <div> <img src = "{{ item[6] }}" class = "photo"></img></div>
+            <div class = "BeanName"> Bean Name: {{item[2]}}</div>
+            <div class = "TastingNotes">Tasting Notes: {{item[3]}} </div>
+            <div class = "RoastLevel"> Roast Level: {{item[4]}}</div>
+            <div class = "Origin"> Origin: {{item[5]}}</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-end"> 
+    <div class="col-6">
+        <hr>
+        <br>
+        <span class="title">Recipes: </span>
+        <br>
+            {% for recipe in recipes %}
+                <div><span><a onclick="location.href='/display_recipe/{{recipe[1]}}.html'" class="link-info" style="cursor: pointer;">{{recipe[0]}}</a></span></div>
+            {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

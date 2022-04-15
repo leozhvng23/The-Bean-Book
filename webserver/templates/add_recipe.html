@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-8">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div id="login-error-msg-holder">
+                    {% for message in messages %}
+                    <p id="login-error-msg"><span>{{ message }}</span></p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="add_card">
+            <form id="add_form" action="/add_recipe" method="POST">
+                <label for="name" class="medium mediumLarge">Recipe Name:</label><br>
+                <input type="text" class="textbox" id="nameInput" name="name" required><br>
+                
+                <label for="brew_time" class="medium mediumLarge">Brew Time:</label><br>
+                <input type="test" class="textbox" id="imageInput" pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$" name="brew_time" placeholder="hr:min:sec" required><br>
+                
+                <label for="yield" class="medium mediumLarge">Yield:</label><br>
+                <input type="number" class="textbox" id="roasterInput" name="yield" placeholder="Number of grams" required><br>
+                
+                <label for="description" class="medium mediumLarge">Description:</label><br>
+                <textarea class="textbox" id="descriptionInput" name="description" form="add_form" wrap="soft" rows="2" required></textarea><br>
+                
+                <label for="guide" class="medium mediumLarge">Guide:</label><br>
+                <input type="text" class="textbox" id="varietyInput" name="guide" placeholder="Recipe brew guide" required><br>
+                
+                <label for="filter_coffee" class="medium mediumLarge">Filter Coffee: </label><br>
+                <select name="filter_coffee" id="filter_coffee" class="dropdown">
+                    <option value=1>Yes</option>
+                    <option value=0>No</option>
+                </select>
+                <br>
+                
+                <label for="espresso" class="medium mediumLarge">Espresso: </label><br>
+                <select name="espresso" id="espresso" class="dropdown">
+                    <option value=1>Yes</option>
+                    <option value=0>No</option>
+                </select>
+                <br>
+
+                <label for="image" class="medium mediumLarge">Image:</label><br>
+                <input type="url" class="textbox" id="elevationInput" name="image" placeholder="Image URL" required><br>
+
+                <label for="bean" class="medium mediumLarge">Bean:</label><br>
+                <select name="bean" id="bean" class="dropdown">
+                    {% for bean in beans %}
+                        <option value={{bean[0]}}>{{bean[1]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+
+                <label for="bean_amount" class="medium mediumLarge">Bean Dosage:</label><br>
+                <input type="number" class="textbox" id="bean_amount" name="bean_amount" placeholder="Dosage in grams" required><br>
+
+                <label for="grinder" class="medium mediumLarge">Grinder:</label><br>
+                <select name="grinder" id="grinder" class="dropdown">
+                    {% for grinder in grinders %}
+                        <option value={{grinder[0]}}>{{grinder[1]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+
+                <label for="grinder" class="medium mediumLarge">Grinder Setting:</label><br>
+                <input type="text" class="textbox" id="roastInput" name="grinder_setting" placeholder="Grinder setting description" required><br>
+
+                <label for="brewer" class="medium mediumLarge">Brewer:</label><br>
+                <select name="brewer" id="brewer" class="dropdown">
+                    {% for brewer in brewers %}
+                        <option value={{brewer[0]}}>{{brewer[1]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+
+                <label for="brewer" class="medium mediumLarge">Brewer Setting:</label><br>
+                <input type="text" class="textbox" id="roastInput" name="brewer_setting" placeholder="Brewer setting description" required><br>
+
+                <button class="recipe-form-submit" type="submit"><span class="medium mediumLarge">Add</span></button>
+            </form> 
+        </div>
+    </div>
+</div>
+{% endblock %}

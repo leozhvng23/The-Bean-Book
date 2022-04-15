@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col">
+        <span class="title">Coffee Beans</span>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <div>
+            {% for item in data %}
+            <div><span>{{item[0]}} | </span><span><a href = "{{url_for('display_bean', id=item[0])}}">{{item[2]}}</a></link></span></div> 
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

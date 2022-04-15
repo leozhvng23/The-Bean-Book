@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'home.js') }}"></script>
+<br>
+<div class="row">
+    <div class="col">
+        <span class="title">Coffee Equipments</span>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col">
+        <div>
+            {% for item in data %}
+
+            <div><span>{{item[0]}} | </span><span><a href = "{{url_for('display_equipment', id=item[0])}}">{{item[1]}}</a></link></span></div> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
