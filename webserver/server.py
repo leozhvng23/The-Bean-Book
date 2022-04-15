@@ -43,7 +43,7 @@ def teardown_request(exception):
 
 @app.route("/all_equipments.html")
 def display_equipments():
-	if not session.get('logged_in'):
+	if 'username' not in session:	
 		return render_template('login.html')
 	else:
 		print(request.args)
@@ -55,7 +55,7 @@ def display_equipments():
 
 @app.route('/all_recipes.html')
 def display_recipes():
-	if not session.get('logged_in'):
+	if 'username' not in session:	
 		return render_template('login.html')
 	else:
 		cursor = g.conn.execute("select * from recipes")
@@ -66,7 +66,7 @@ def display_recipes():
 
 @app.route('/add_recipe.html')
 def add():
-	if not session.get('logged_in'):
+	if 'username' not in session:	
 		return render_template('login.html')
 	else:
 		cursor = g.conn.execute("select bid, name from bean_roasts")
@@ -214,7 +214,7 @@ def display_equipment(id):
 
 @app.route('/display_profile')
 def display_profile():
-	if not session.get('logged_in'):
+	if 'username' not in session:	
 		return render_template('login.html')
 	else:
 		cursor = g.conn.execute("select name, bio from users where uid = %s", USER_ID)
@@ -254,7 +254,7 @@ def follow_user(uid):
 
 @app.route('/all_beans.html')
 def display_beans():
-	if not session.get('logged_in'):
+	if 'username' not in session:	
 		return render_template('login.html')
 	else:
 		cursor = g.conn.execute("select * from bean_roasts")
@@ -265,7 +265,7 @@ def display_beans():
 
 @app.route('/')
 def home():
-	if not session.get('logged_in'):
+	if 'username' not in session:
 		return render_template('login.html')
 	else:
 		cursor = g.conn.execute("select name from users where uid = %s", USER_ID)
@@ -290,7 +290,7 @@ def do_main_login():
 	uid_result = list(cursor)
 	cursor.close()
 	if len(uid_result) > 0:
-		session['logged_in'] = True
+		session['username'] = POST_USERNAME
 		USER_ID = uid_result[0][0]
 		print("logged in user id:", USER_ID)
 	else:
@@ -320,7 +320,7 @@ def signup():
 
 @app.route('/logout')
 def logout():
-	session['logged_in'] = False
+	session.pop('username', None)
 	return home()
 
 if __name__ == '__main__':
