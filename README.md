@@ -12,5 +12,9 @@
 - AWS RDS
 - Google Could Platform
 
+## Screenshots
+![Website Home Page Screenshot](screenshots/home.png)
+![Website Recipe Page Screenshot](screenshots/recipe_page.png)
+
 ## Author
 - [Leo Zhang](https://github.com/leozhvng23 "Leo Zhang")
